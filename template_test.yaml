@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  update-efs-throughputmode
+
+  Sample SAM Template for sam-app
+
+Parameters:
+  Mibps:
+    Type: String
+    Default: 8
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  # CloudWatchアラーム用のTopic
+  EfsAlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: EfsAlarmTopic
+      DisplayName: EfsAlarmTopic
+
+  # Lambda function
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda_function/
+      Description: "Update EFS throughput mode."
+      Handler: app_test.lambda_handler
+      Runtime: python3.7
+      Policies:
+        - AWSLambdaBasicExecutionRole
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: "Allow"
+              Action:
+                - "elasticfilesystem:DescribeFileSystems"
+                - "elasticfilesystem:UpdateFileSystem"
+              Resource:
+                - "arn:aws:elasticfilesystem:*:*:file-system/*"
+      Environment:
+        Variables:
+          TZ: "Asia/Tokyo"
+          MIBPS: !Ref Mibps
+      Events:
+        SnsAlarmTopic:
+          Type: SNS
+          Properties:
+            Topic: !Ref EfsAlarmTopic

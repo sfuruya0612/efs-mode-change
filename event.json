@@ -1,0 +1,50 @@
+{
+    "Records": [
+        {
+            "EventSource": "aws:sns",
+            "EventVersion": "1.0",
+            "EventSubscriptionArn": "arn:aws:sns:ap-northeast-1:123456789012:EfsAlarmTopic:xxxx-yyyy-zzzz-aaaa",
+            "Sns": {
+                "Type": "Notification",
+                "MessageId": "xxxx-yyyy-zzzz",
+                "TopicArn": "arn:aws:sns:ap-northeast-1:123456789012:EfsAlarmTopic",
+                "Subject": "ALARM: \"efs-test-alarm\" in Asia Pacific (Tokyo)",
+                "Message": {
+                    "AlarmName": "efs-test-alarm",
+                    "AlarmDescription": null,
+                    "AWSAccountId": "123456789012",
+                    "NewStateValue": "ALARM",
+                    "NewStateReason": "Threshold Crossed: 1 out of the last 1 datapoints [2.30897441833E12 (27/08/19 05:19:00)] was greater than or equal to the threshold (1.0) (minimum 1 datapoint for OK -> ALARM transition).",
+                    "StateChangeTime": "2019-08-27T05:24:00.868+0000",
+                    "Region": "Asia Pacific (Tokyo)",
+                    "OldStateValue": "OK",
+                    "Trigger": {
+                        "MetricName": "BurstCreditBalance",
+                        "Namespace": "AWS/EFS",
+                        "StatisticType": "Statistic",
+                        "Statistic": "AVERAGE",
+                        "Unit": null,
+                        "Dimensions": [
+                            {
+                                "value": "fs-XXXXYYYY",
+                                "name": "FileSystemId"
+                            }
+                        ],
+                        "Period": 300,
+                        "EvaluationPeriods": 1,
+                        "ComparisonOperator": "GreaterThanOrEqualToThreshold",
+                        "Threshold": 1,
+                        "TreatMissingData": "- TreatMissingData: notBreaching",
+                        "EvaluateLowSampleCountPercentile": ""
+                    }
+                },
+                "Timestamp": "2019-08-27T05:24:00.932Z",
+                "SignatureVersion": "1",
+                "Signature": "aaaa",
+                "SigningCertUrl": "https://sns.ap-northeast-1.amazonaws.com/SimpleNotificationService-1234567890abcdeabcdeabcdeabcdeab.pem",
+                "UnsubscribeUrl": "https://sns.ap-northeast-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:ap-northeast-1:123456789012:EfsAlarmTopic:xxxx-yyyy-zzzz-aaaa",
+                "MessageAttributes": {}
+            }
+        }
+    ]
+}
